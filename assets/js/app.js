@@ -1,31 +1,38 @@
 const modelsData = [
     {
-        id: 'burger',
+        id: 'avocado',
         name: 'Aguacate',
-        category: 'test',
+        category: 'comidas',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF-Binary/Avocado.glb',
         accentColor: '#147E72'
     },
     {
-        id: 'cake',
+        id: 'fox',
         name: 'Zorro',
         category: 'test',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Fox/glTF-Binary/Fox.glb',
         accentColor: '#E79D19'
     },
     {
-        id: 'coffee',
+        id: 'chair',
         name: 'Sillón',
         category: 'test',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb',
         accentColor: '#147E72'
     },
     {
-        id: 'donut',
+        id: 'camera',
         name: 'Cámara',
         category: 'test',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/AntiqueCamera/glTF-Binary/AntiqueCamera.glb',
         accentColor: '#E79D19'
+    },
+    {
+        id: 'milk',
+        name: 'Leche',
+        category: 'bebidas',
+        src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/WaterBottle/glTF-Binary/WaterBottle.glb',
+        accentColor: '#147E72'
     }
 ];
 
@@ -136,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Iniciar
+    currentCategory = 'test'; // Reset default
     renderCategories();
     renderCarousel();
 
@@ -162,5 +170,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }, 1500);
+
+    // --- Lógica de Navegación Multi-página ---
+    function showPage(pageId) {
+        document.querySelectorAll('.app-page').forEach(page => {
+            page.classList.toggle('active', page.id === pageId);
+        });
+
+        // Efecto para el visor al entrar
+        if (pageId === 'page-viewer') {
+            modelViewer.style.opacity = '0';
+            setTimeout(() => {
+                modelViewer.style.opacity = '1';
+                modelViewer.style.transition = 'opacity 0.8s ease';
+            }, 100);
+        }
+    }
+
+    // Event Listeners de Navegación
+    document.getElementById('btn-intro-next')?.addEventListener('click', () => showPage('page-itsi'));
+    document.getElementById('btn-itsi-prev')?.addEventListener('click', () => showPage('page-intro'));
+    document.getElementById('btn-itsi-next')?.addEventListener('click', () => showPage('page-viewer'));
+    document.getElementById('btn-back-home')?.addEventListener('click', () => showPage('page-itsi'));
 
 });
