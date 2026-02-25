@@ -4,6 +4,7 @@ const modelsData = [
         name: 'Aguacate',
         category: 'comidas',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF-Binary/Avocado.glb',
+        thumbnail: 'assets/img/thumbnails/aguacate.png',
         accentColor: '#147E72'
     },
     {
@@ -11,6 +12,7 @@ const modelsData = [
         name: 'Zorro',
         category: 'test',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Fox/glTF-Binary/Fox.glb',
+        thumbnail: 'assets/img/thumbnails/zorro.png',
         accentColor: '#E79D19'
     },
     {
@@ -18,6 +20,7 @@ const modelsData = [
         name: 'Sillón',
         category: 'test',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb',
+        thumbnail: 'assets/img/thumbnails/sillon.png',
         accentColor: '#147E72'
     },
     {
@@ -25,6 +28,7 @@ const modelsData = [
         name: 'Cámara',
         category: 'test',
         src: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/AntiqueCamera/glTF-Binary/AntiqueCamera.glb',
+        thumbnail: 'assets/img/thumbnails/camara.png',
         accentColor: '#E79D19'
     },
     {
@@ -70,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inicializar catálogo
+    // Inicializar catálogo con Optimización de Rendimiento
     function renderCarousel() {
         carousel.innerHTML = '';
         const filteredModels = modelsData.filter(m => m.category === currentCategory);
@@ -85,18 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = `model-card ${index === 0 ? 'active' : ''}`;
             card.dataset.id = model.id;
 
+            // Uso de imágenes (thumbnails) en lugar de multiples model-viewer para performance
             card.innerHTML = `
                 <div class="model-preview-container">
-                    <model-viewer 
-                        src="${model.src}" 
+                    <img 
+                        src="${model.thumbnail}" 
+                        alt="${model.name}" 
                         loading="lazy" 
-                        reveal="auto" 
-                        auto-rotate 
-                        rotation-per-second="30deg"
-                        shadow-intensity="1"
-                        environment-image="neutral"
-                        alt="${model.name}">
-                    </model-viewer>
+                        class="model-thumb">
                 </div>
                 <div class="model-name">${model.name}</div>
             `;
